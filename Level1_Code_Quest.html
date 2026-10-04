@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deniz Niflioğlu — Week 1 &amp; 2 English</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+:root{
+  --navy:#14213d;
+  --cyan:#00a8cc;
+  --cyan-light:rgba(0,168,204,.11);
+  --green:#6dbb5a;
+  --green-light:rgba(109,187,90,.12);
+  --yellow:#f6c945;
+  --yellow-light:rgba(246,201,69,.16);
+  --orange:#f39c4a;
+  --orange-light:rgba(243,156,74,.12);
+  --purple:#7667c7;
+  --purple-light:rgba(118,103,199,.11);
+  --cream:#f7f5ee;
+  --text:#263247;
+  --muted:#718096;
+  --border:#dfe5e8;
+  --white:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text);
+  line-height:1.65;
+}
+body:before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(circle,rgba(0,168,204,.045) 1px,transparent 1px);
+  background-size:34px 34px;
+}
+.container{max-width:720px;margin:auto;padding:22px 15px 70px;position:relative;z-index:1}
+
+.header{
+  background:linear-gradient(135deg,#14213d,#087f9b,#00a8cc);
+  color:#fff;border-radius:24px;padding:25px 25px 21px;margin-bottom:14px;
+  position:relative;overflow:hidden;
+}
+.header:before,.header:after{
+  content:'';position:absolute;border-radius:50%;background:#fff;opacity:.08;
+}
+.header:before{width:230px;height:230px;right:-75px;top:-75px}
+.header:after{width:140px;height:140px;left:30px;bottom:-85px}
+.badge{
+  display:inline-block;border:2px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.17);border-radius:50px;padding:3px 12px;
+  font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;
+}
+h1{font-family:'Fredoka',sans-serif;font-size:clamp(25px,6vw,38px);line-height:1.08;margin:9px 0 6px}
+.subtitle{font-size:13px;font-weight:700;color:rgba(255,255,255,.9)}
+.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.pill{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+border-radius:50px;padding:4px 10px;font-size:11px;font-weight:800}
+
+.tabs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:13px}
+.tab{
+  border:2px solid var(--border);background:#fff;color:var(--muted);
+  border-radius:50px;padding:8px 12px;font:800 12px 'Nunito';cursor:pointer;
+}
+.tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+.page{display:none}.page.active{display:block}
+
+.card{
+  background:#fff;border:2px solid var(--border);border-radius:18px;
+  margin-bottom:11px;overflow:hidden;
+}
+.acc{
+  width:100%;border:0;background:#fff;text-align:left;cursor:pointer;
+  padding:13px 16px;display:flex;align-items:center;gap:9px;
+  font:800 14px 'Nunito';color:var(--text);border-bottom:2px dashed transparent;
+}
+.acc:hover{background:var(--cyan-light)}
+.acc.open{border-bottom-color:var(--border)}
+.acc:after{content:'›';margin-left:auto;font-size:21px;color:var(--muted);transition:.2s}
+.acc.open:after{transform:rotate(90deg)}
+.panel{display:none;padding:15px 16px 18px}
+.panel.open{display:block}
+
+.box{border-radius:12px;padding:12px 14px;margin-bottom:10px;font-size:13px}
+.box h3{font:700 15px 'Fredoka';margin-bottom:5px}
+.cyan{background:var(--cyan-light);border:2px solid var(--cyan)}
+.cyan h3{color:#087f9b}
+.green{background:var(--green-light);border:2px solid var(--green)}
+.green h3{color:#47873b}
+.yellow{background:var(--yellow-light);border:2px solid var(--yellow)}
+.yellow h3{color:#946f00}
+.orange{background:var(--orange-light);border:2px solid var(--orange)}
+.orange h3{color:#a85c18}
+.purple{background:var(--purple-light);border:2px solid #a79ee0}
+.purple h3{color:#5b4daf}
+
+.instr{font-size:12px;font-weight:800;background:#eef2f4;border-left:5px solid var(--cyan);
+padding:8px 11px;border-radius:8px;margin-bottom:10px}
+.wordbank{display:flex;flex-wrap:wrap;gap:7px;margin-top:7px}
+.word{background:#fff;border:2px solid var(--border);border-radius:9px;padding:4px 9px;font-weight:800;font-size:12px}
+
+.q{
+  background:#faf9f4;border:2px solid var(--border);border-radius:10px;
+  padding:9px 11px;margin-bottom:7px;font-size:13px;font-weight:700;
+}
+.q input,.q textarea{
+  border:0;border-bottom:2px solid #bcc7cc;background:transparent;
+  font:800 13px 'Nunito';color:var(--text);outline:none;
+}
+.q input{width:145px;text-align:center}
+.q textarea{width:100%;border:2px solid var(--border);border-radius:8px;padding:8px;min-height:80px;margin-top:7px}
+.answer{display:none;color:#47873b;font-size:11px;font-weight:900;margin-top:4px}
+.showanswers{
+  width:100%;border:0;background:var(--navy);color:#fff;border-radius:10px;
+  padding:10px;font:800 12px 'Nunito';cursor:pointer;margin-top:8px;
+}
+.speak{
+  background:var(--purple-light);border:2px solid #a79ee0;border-radius:12px;padding:12px 14px;
+  margin-bottom:10px;font-size:13px;
+}
+.speak strong{color:#5b4daf}
+.code{
+  background:#eef2f4;color:#14213d;border:2px solid #cfd8dc;border-radius:12px;padding:13px 14px;margin-bottom:10px;
+  font-family:monospace;font-size:12px;line-height:1.7;
+}
+.code b{color:#087f9b}.code em{color:#47873b;font-style:normal}
+.mission{
+  border:2px solid var(--yellow);background:var(--yellow-light);border-radius:14px;
+  padding:13px 14px;margin-bottom:10px;
+}
+.mission h3{font:700 17px 'Fredoka';color:#806100;margin-bottom:4px}
+ul{padding-left:20px} li{margin:3px 0}
+.small{font-size:11px;color:var(--muted);font-weight:700}
+.score{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:8px
+}
+.score div{background:#fff;border:2px solid var(--border);border-radius:10px;padding:7px;text-align:center;font-size:11px;font-weight:900}
+.footer{text-align:center;color:var(--muted);font-size:11px;margin-top:18px;font-weight:700}
+
+@media(max-width:560px){
+  .container{padding:15px 11px 50px}
+  .header{padding:21px 18px}
+  .score{grid-template-columns:repeat(2,1fr)}
+}
+@media print{
+  body{background:#fff}
+  body:before,.tabs{display:none}
+  .container{max-width:none;padding:0}
+  .page{display:block!important}
+  .card{break-inside:avoid}
+  .panel{display:block!important}
+}
+
+.resource-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.picture-card{background:#fff;border:2px solid var(--border);border-radius:14px;padding:10px;text-align:center}
+.picture-card svg{width:100%;height:125px;display:block;margin:auto}
+.picture-card .caption{font-weight:900;font-size:12px;margin-top:5px}
+.picture-card .prompt{font-size:11px;color:var(--muted);font-weight:700;margin-top:2px}
+.timebar{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 12px}
+.time{background:var(--navy);color:#fff;border-radius:50px;padding:4px 9px;font-size:10px;font-weight:900}
+.taskbox{background:#fff;border:2px solid var(--border);border-radius:12px;padding:11px 13px;margin-bottom:9px}
+.taskbox h4{font:700 15px 'Fredoka';margin-bottom:4px;color:var(--navy)}
+.number{display:inline-flex;width:24px;height:24px;border-radius:50%;align-items:center;justify-content:center;background:var(--cyan);color:#fff;font-weight:900;font-size:11px;margin-right:5px}
+@media(max-width:560px){.resource-grid{grid-template-columns:1fr 1fr}}
+
+.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.memory-card{background:#fff;border:2px solid var(--border);border-radius:14px;padding:9px;text-align:center}
+.memory-card svg{width:100%;height:105px;display:block;background:var(--cream);border-radius:10px}
+.memory-card input{box-sizing:border-box;width:100%;margin-top:8px;border:2px solid var(--border);border-radius:9px;padding:9px;font:800 13px Nunito,sans-serif;text-align:center;color:var(--text);background:#fff}
+.memory-card input:focus{outline:none;border-color:var(--cyan)}
+.memory-card.correct{border-color:var(--green);background:var(--green-light)}
+.memory-card.wrong{border-color:var(--orange);background:var(--orange-light)}
+.memory-buttons{display:flex;gap:8px;margin-top:12px}
+.memory-buttons .showanswers{margin-top:0}
+.memory-buttons .reset{background:var(--purple)}
+.memory-score{margin-top:8px;font-size:13px}
+@media(max-width:700px){.memory-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:430px){.memory-grid{grid-template-columns:1fr}}
+.miniicon{font-size:42px;line-height:1.2}
+
+.howto{background:#fffdf5;border:2px solid var(--yellow);border-left:7px solid var(--yellow);border-radius:12px;padding:12px 14px;margin-bottom:10px;font-size:13px}
+.howto h3{font:700 15px 'Fredoka';color:#806100;margin-bottom:5px}
+.howto ol{margin:4px 0 6px 20px}
+.howto .line{margin-top:5px}
+.gram{background:var(--purple-light);border:2px solid #a79ee0;border-left:7px solid var(--purple);border-radius:12px;padding:12px 14px;margin-bottom:10px;font-size:13px}
+.gram h3{font:700 15px 'Fredoka';color:#5b4daf;margin-bottom:5px}
+.gram .ex{background:#fff;border:1px solid #d9d4f2;border-radius:8px;padding:6px 10px;margin:5px 0;font-weight:700}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <span class="badge">DENIZ NIFLIOĞLU • ENGLISH CODE QUEST</span>
+  <h1>Code Quest: Level 1</h1>
+  <p class="subtitle">Week 1 &amp; Week 2 • Keep it. Find it. Use it. Say it!</p>
+  <div class="meta">
+    <span class="pill">👦 Age 7</span>
+    <span class="pill">🏫 Gelişim College</span>
+    <span class="pill">⏱ 45–50 min</span>
+    <span class="pill">💻 Computer theme</span>
+    <span class="pill">⭐ Confidence first</span>
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="showPage('parents',this)">👨‍👩‍👦 Parents</button>
+  <button class="tab" onclick="showPage('l1',this)">💻 Week 1</button>
+  <button class="tab" onclick="showPage('hw1',this)">🏠 Homework 1</button>
+  <button class="tab" onclick="showPage('memory',this)">🧠 Memory Game</button>
+  <button class="tab" onclick="showPage('l2',this)">🚀 Week 2</button>
+  <button class="tab" onclick="showPage('hw2',this)">🏠 Homework 2</button>
+  <button class="tab" onclick="showPage('resources',this)">🖼️ Visual Resources</button>
+</div>
+
+<section id="parents" class="page active">
+
+<div class="card"><button class="acc open">💙 Welcome, Mum and Dad</button>
+<div class="panel open">
+<div class="box cyan"><h3>What these lessons are for</h3>
+<p>Deniz already hears a lot of English at school. These private lessons are different. They are his <strong>practice, memory and confidence space</strong>: a place to use the English he already knows, say it out loud, and feel proud of it.</p></div>
+<div class="box green"><h3>Our goals for Weeks 1 and 2</h3>
+<ul>
+<li>Remember and use everyday school English</li>
+<li>Answer simple questions <strong>by himself</strong>, without looking at you first</li>
+<li>Say complete short sentences</li>
+<li>Follow 2-step and then 3-step instructions</li>
+<li>Talk about himself, school, what he likes and what he can do</li>
+<li>Read a short text and show that he understands it</li>
+</ul></div>
+<p class="small">This page is for you. The Week and Homework tabs are written so that Deniz and Mum can use them together.</p>
+</div></div>
+
+<div class="card"><button class="acc">📚 What Deniz is learning</button>
+<div class="panel">
+<div class="box yellow"><h3>🗣️ Words</h3>
+<p>School and computer words such as <strong>computer, book, pencil, bag, school, teacher, friend</strong>, and action words such as <strong>read, write, play, go, learn</strong>.</p>
+<p class="small">The full word list and the picture game are in the <strong>Memory Game</strong> tab.</p></div>
+<div class="box cyan"><h3>💬 Sentences about himself</h3>
+<p>My name is ___. &nbsp; I am ___ years old. &nbsp; I like ___. &nbsp; My favourite colour is ___. &nbsp; I can ___.</p></div>
+<div class="box purple"><h3>🧩 Grammar</h3>
+<ul>
+<li><strong>Week 1:</strong> I am… / I like… / I can…</li>
+<li><strong>Week 2:</strong> I play → <strong>he plays</strong>. Also: Do you…? and Can you…?</li>
+</ul>
+<p class="small">See “Grammar in plain words” below for simple explanations.</p></div>
+<div class="box green"><h3>👂 Listening and doing</h3>
+<p>Deniz listens to English instructions and does them in order: “Pick up your pencil. Put it on the table. Open your book.”</p></div>
+<div class="box orange"><h3>📖 Reading and speaking</h3>
+<p>He reads a short story, answers questions about it, and then speaks by himself for 30–60 seconds about his school day.</p></div>
+</div></div>
+
+<div class="card"><button class="acc">🗓️ What happens in a lesson</button>
+<div class="panel">
+<div class="instr">Every lesson follows the same pattern. When Deniz knows what is coming, he can put all his energy into the English.</div>
+<ol>
+<li><strong>Hello and chat (5 min):</strong> Deniz answers simple questions about himself.</li>
+<li><strong>Memory Blast (5 min):</strong> he remembers words from last time, using pictures.</li>
+<li><strong>New language (10 min):</strong> one small piece of grammar, step by step.</li>
+<li><strong>Game or movement challenge (10 min):</strong> for example, following “coding” instructions.</li>
+<li><strong>Speaking mission (10 min):</strong> Deniz speaks by himself for about a minute.</li>
+<li><strong>Deniz Challenge (5 min):</strong> a short challenge and a confidence point.</li>
+</ol>
+<p class="small" style="margin-top:8px">Lessons last about 45–50 minutes.</p>
+</div></div>
+
+<div class="card"><button class="acc">🏠 How you can help at home</button>
+<div class="panel">
+<div class="box yellow"><h3>The “Think first” routine</h3>
+<p>When you ask Deniz a question, wait a few seconds. If he looks at you for help, smile and say:</p>
+<p><strong>“Think first. You know this. Tell me.”</strong></p>
+<p>Please do not give the answer. His own answer, even with mistakes, is the goal.</p></div>
+<div class="box green"><h3>Homework: 5–10 minutes</h3>
+<ul>
+<li>Sit with Deniz, but let him do the typing and writing.</li>
+<li>He says his sentences out loud to you.</li>
+<li>Short and happy is better than long and stressful.</li>
+</ul></div>
+<div class="box purple"><h3>Praise the effort</h3>
+<ul>
+<li>“Great! You answered by yourself!”</li>
+<li>“I like how you thought about that.”</li>
+<li>“You didn't need any help!”</li>
+<li>“Excellent try — keep going.”</li>
+</ul></div>
+<div class="box orange"><h3>Please try not to</h3>
+<ul>
+<li>Correct every small mistake</li>
+<li>Finish his sentences for him</li>
+<li>Translate straight away</li>
+</ul></div>
+</div></div>
+
+<div class="card"><button class="acc">🧠 The Memory Game tab</button>
+<div class="panel">
+<div class="box cyan"><h3>How it works</h3>
+<ol>
+<li>Deniz looks at a picture. <strong>The word is not shown.</strong></li>
+<li>He says the English word out loud.</li>
+<li>He types the word in the box under the picture.</li>
+<li>He presses <strong>Check my answers</strong>. Green means correct. Orange means look again.</li>
+<li>He fixes the orange ones and presses Check again, or presses <strong>Start again</strong> for a new round.</li>
+</ol></div>
+<div class="box yellow"><h3>Tip</h3><p>Five minutes a few times a week works better than one long session. If he is stuck, say only the first sound (for example “b…”) instead of the whole word.</p></div>
+</div></div>
+
+<div class="card"><button class="acc">🔎 Grammar in plain words</button>
+<div class="panel">
+<div class="gram"><h3>🔎 I am / I like / I can</h3><p>Three small starters that let Deniz talk about himself.</p><div class="ex"><strong>I am</strong> seven. (who I am)</div><div class="ex"><strong>I like</strong> computers. (things I enjoy)</div><div class="ex"><strong>I can</strong> read. (things I am able to do)</div><p class="small" style="margin-top:6px">After “I can” we use a simple verb: I can read, I can write.</p></div>
+<div class="gram"><h3>🔎 He plays, she reads</h3><p>When we talk about one other person (he or she), most verbs get an <strong>-s</strong> at the end.</p><div class="ex">I play → <strong>he plays</strong></div><div class="ex">I read → <strong>she reads</strong></div><div class="ex">I go → <strong>he goes</strong> (a few verbs add -es)</div></div>
+<div class="gram"><h3>🔎 Do you…? / Can you…?</h3><p>These are the questions Deniz learns to ask and answer.</p><div class="ex">Do you like school? → <strong>Yes, I do.</strong> / <strong>No, I don't.</strong></div><div class="ex">Can you read? → <strong>Yes, I can.</strong> / <strong>No, I can't.</strong></div></div>
+<div class="gram"><h3>🔎 Where? What? Who?</h3><p>Question words help Deniz find the answer in a story.</p><div class="ex"><strong>Where</strong> → a place (at school)</div><div class="ex"><strong>What</strong> → a thing (a pencil)</div><div class="ex"><strong>Who</strong> → a person (his friend)</div></div>
+</div></div>
+
+<div class="card"><button class="acc">❓ Questions parents ask</button>
+<div class="panel">
+<div class="box cyan"><h3>Deniz makes mistakes. Should I correct him?</h3><p>Not every one. At this stage the most important thing is that he speaks with confidence. The teacher corrects the important patterns gently in the lesson.</p></div>
+<div class="box green"><h3>He looks at me or switches to Turkish.</h3><p>Smile, wait about five seconds and say “Think first.” Most of the time he does know the answer.</p></div>
+<div class="box yellow"><h3>He cannot remember a word.</h3><p>Show the picture again and give the first sound. Only say the whole word if he is still stuck, and then ask him to repeat it.</p></div>
+<div class="box purple"><h3>How long should homework take?</h3><p>5–10 minutes. The aim is remembering and saying, not lots of writing.</p></div>
+</div></div>
+
+<div class="card"><button class="acc">👩‍🏫 For the teacher</button>
+<div class="panel">
+<div class="instr">Teaching notes. Parents do not need to read this section.</div>
+<ol>
+<li><strong>5 min:</strong> Hello + conversation</li>
+<li><strong>5 min:</strong> Memory Blast from previous lesson</li>
+<li><strong>10 min:</strong> Target language</li>
+<li><strong>10 min:</strong> Game / movement / coding challenge</li>
+<li><strong>10 min:</strong> Speaking mission</li>
+<li><strong>5 min:</strong> Deniz Challenge + confidence point</li>
+</ol>
+<h3 style="font:700 15px Fredoka;margin:12px 0 6px">📋 What to observe</h3>
+<div class="score">
+<div>Independent answers<br>⬜⬜⬜⬜⬜</div>
+<div>Vocabulary recall<br>⬜⬜⬜⬜⬜</div>
+<div>Speaking length<br>⬜⬜⬜⬜⬜</div>
+<div>Instructions<br>⬜⬜⬜⬜⬜</div>
+</div>
+<p class="small" style="margin-top:10px">At the end of Week 2, note one thing Deniz can now do more independently than in Week 1.</p>
+</div></div>
+
+</section>
+
+<section id="l1" class="page">
+
+<div class="card"><button class="acc">🟢 1. Mission Briefing + Hello — 5 minutes</button>
+<div class="panel open">
+<div class="timebar"><span class="time">5 MIN</span><span class="time">SPEAKING</span><span class="time">CONFIDENCE</span></div>
+<div class="howto"><h3>📝 How to do it</h3><p><strong>Goal:</strong> Say hello and answer simple questions by yourself.</p><ol><li>The teacher asks one question at a time.</li><li>Deniz thinks for 3 seconds.</li><li>He answers with a full sentence, not just one word.</li></ol><p class="line"><strong>Say:</strong> “My name is Deniz.” “I am seven.” “I like computers.”</p><p class="line"><strong>✅ Success:</strong> Deniz answers without looking at Mum first.</p></div><div class="gram"><h3>🔎 Question → Answer</h3><p>Every question has an answer pattern. Learn the pattern and you can answer any time.</p><div class="ex">What is your name? → <strong>My name is</strong> Deniz.</div><div class="ex">How old are you? → <strong>I am</strong> seven.</div><div class="ex">What do you like? → <strong>I like</strong> computers.</div><div class="ex">What is your favourite colour? → <strong>My favourite colour is</strong> blue.</div></div>
+
+<div class="box cyan"><h3>Teacher says</h3><p>“Welcome to Code Quest! Today we are going to collect English words and use them to unlock missions.”</p></div>
+<div class="speak"><strong>Ask Deniz:</strong><br>What is your name? • How old are you? • What is your favourite colour? • What do you like? • What do you like at school?</div>
+<p class="small">Ask naturally, one question at a time. Give 3–5 seconds of thinking time. If Deniz looks at Mum: “Think first. You know this. Tell me.”</p>
+</div></div>
+
+<div class="card"><button class="acc">🧠 2. Memory Hunt — 7 minutes</button>
+<div class="panel">
+<div class="timebar"><span class="time">7 MIN</span><span class="time">VOCABULARY</span><span class="time">RETRIEVAL</span></div>
+<div class="howto"><h3>📝 How to do it</h3><p><strong>Goal:</strong> Remember the school and computer words.</p><ol><li>The teacher shows a picture.</li><li>Deniz says the English word. If he does not know it, he says “I don't know.” The teacher says the word and Deniz repeats it.</li><li><strong>Round 2:</strong> one picture is covered. Deniz says what is missing: “The book!”</li><li><strong>Round 3:</strong> Deniz picks three pictures and makes a sentence for each.</li></ol><p class="line"><strong>Say:</strong> “I have a book.” “I have a pencil.”</p><p class="line"><strong>✅ Success:</strong> Deniz names at least half of the pictures without help.</p></div><div class="gram"><h3>🔎 a + thing</h3><p>We say <strong>a</strong> before one thing. “I have a ___” tells us what we have.</p><div class="ex">I have <strong>a</strong> book.</div><div class="ex">I have <strong>a</strong> pencil.</div><div class="ex">I have <strong>a</strong> bag.</div></div>
+
+<div class="instr">Use the pictures in the Visual Resources tab. Do not teach the words first — see what Deniz already knows.</div>
+<div class="resource-grid"><div class="picture-card"><div class="miniicon">💻</div><div class="caption">computer</div></div><div class="picture-card"><div class="miniicon">📚</div><div class="caption">book</div></div><div class="picture-card"><div class="miniicon">✏️</div><div class="caption">pencil</div></div><div class="picture-card"><div class="miniicon">🎒</div><div class="caption">bag</div></div><div class="picture-card"><div class="miniicon">🏫</div><div class="caption">school</div></div><div class="picture-card"><div class="miniicon">👩‍🏫</div><div class="caption">teacher</div></div><div class="picture-card"><div class="miniicon">🧑‍🤝‍🧑</div><div class="caption">friend</div></div><div class="picture-card"><div class="miniicon">📖</div><div class="caption">read</div></div><div class="picture-card"><div class="miniicon">📝</div><div class="caption">write</div></div><div class="picture-card"><div class="miniicon">⚽</div><div class="caption">play</div></div><div class="picture-card"><div class="miniicon">🚶</div><div class="caption">go</div></div><div class="picture-card"><div class="miniicon">💡</div><div class="caption">learn</div></div></div>
+<div class="box yellow"><h3>Round 1 → Round 2 → Round 3</h3>
+<p><strong>Round 1:</strong> Name the pictures. <strong>Round 2:</strong> Cover one and ask “What's missing?” <strong>Round 3:</strong> Deniz chooses three and makes sentences.</p></div>
+</div></div>
+
+<div class="card"><button class="acc">📚 3. Build My English Profile — 8 minutes</button>
+<div class="panel">
+<div class="timebar"><span class="time">8 MIN</span><span class="time">READING</span><span class="time">SPEAKING</span></div>
+<div class="howto"><h3>📝 How to do it</h3><p><strong>Goal:</strong> Say five true sentences about yourself.</p><ol><li>Read all five sentences with the teacher.</li><li>Type or say the missing word in each box.</li><li>Cover the sentences. Say them again from memory.</li><li>Choose two sentences. The teacher asks “Why?” Deniz tries to say more.</li></ol><p class="line"><strong>✅ Success:</strong> Deniz says all five sentences without reading.</p></div><div class="gram"><h3>🔎 My sentence starters</h3><p>Each starter is followed by a different kind of word.</p><div class="ex"><strong>My name is</strong> + your name → My name is Deniz.</div><div class="ex"><strong>I am</strong> + number + <strong>years old</strong> → I am seven years old.</div><div class="ex"><strong>I like</strong> + a thing → I like football.</div><div class="ex"><strong>My favourite colour is</strong> + a colour → My favourite colour is green.</div><div class="ex"><strong>I can</strong> + an action → I can swim.</div></div>
+
+<div class="instr">First read together. Then cover the model and let Deniz say each sentence himself.</div>
+<div class="q">1. My name is <input placeholder="name">.</div>
+<div class="q">2. I am <input placeholder="age"> years old.</div>
+<div class="q">3. I like <input placeholder="something">.</div>
+<div class="q">4. My favourite colour is <input placeholder="colour">.</div>
+<div class="q">5. I can <input placeholder="verb">.</div>
+<div class="box green"><h3>Make it longer</h3><p>Choose two answers and ask <strong>“Why?”</strong> or <strong>“Tell me more.”</strong> Model if needed: “I like computers because they are fun.”</p></div>
+</div></div>
+
+<div class="card"><button class="acc">🧩 4. Grammar Code — 7 minutes</button>
+<div class="panel">
+<div class="timebar"><span class="time">7 MIN</span><span class="time">GRAMMAR</span><span class="time">SPEAKING</span></div>
+<div class="howto"><h3>📝 How to do it</h3><p><strong>Goal:</strong> Choose the right small word: am, like or can.</p><ol><li>Read the three code commands in the blue box.</li><li>Choose <strong>am</strong>, <strong>like</strong> or <strong>can</strong> for each sentence and type it in the box.</li><li>Press <strong>Show Answers</strong> and check together.</li><li>Close the answers. Say five new true sentences out loud.</li></ol><p class="line"><strong>✅ Success:</strong> Deniz gets four out of five right, then says new sentences himself.</p></div><div class="gram"><h3>🔎 am / like / can</h3><p>Each word does a different job.</p><div class="ex"><strong>I am</strong> = who I am or how old I am → I am seven.</div><div class="ex"><strong>I like</strong> = what I enjoy → I like computers.</div><div class="ex"><strong>I can</strong> = what I am able to do → I can read.</div><p class="small" style="margin-top:6px">After “I can” we use the simple action word, with no “to”: I can write (not “I can to write”).</p></div>
+
+<div class="box cyan"><h3>Three code commands</h3><p><strong>I am</strong> seven. &nbsp; <strong>I like</strong> computers. &nbsp; <strong>I can</strong> read.</p></div>
+<div class="q">1. I <input data-answer="am" placeholder="am / like / can"> seven.</div>
+<div class="q">2. I <input data-answer="like" placeholder="am / like / can"> computers.</div>
+<div class="q">3. I <input data-answer="can" placeholder="am / like / can"> read.</div>
+<div class="q">4. I <input data-answer="like" placeholder="am / like / can"> English.</div>
+<div class="q">5. I <input data-answer="can" placeholder="am / like / can"> write.</div>
+<button class="showanswers" onclick="toggleAnswers(this)">Show Answers</button>
+<div class="answer">1 am • 2 like • 3 can • 4 like • 5 can</div>
+<p class="small" style="margin-top:8px">After checking, remove the written choices and say five new true sentences aloud.</p>
+</div></div>
+
+<div class="card"><button class="acc">🎮 5. Coding Command Challenge — 8 minutes</button>
+<div class="panel">
+<div class="timebar"><span class="time">8 MIN</span><span class="time">LISTENING</span><span class="time">MOVEMENT</span></div>
+<div class="howto"><h3>📝 How to do it</h3><p><strong>Goal:</strong> Listen carefully and do the steps in the right order.</p><ol><li>The teacher says a short algorithm. Deniz listens once.</li><li>Deniz does the actions in the same order.</li><li><strong>Level up:</strong> add a third step.</li><li><strong>Reverse the code:</strong> Deniz is the programmer and gives the teacher two or three instructions. The teacher follows them exactly.</li></ol><p class="line"><strong>Say:</strong> “Touch your head.” “Point to the door.”</p><p class="line"><strong>✅ Success:</strong> Deniz does a 2-step algorithm correctly, then tries 3 steps.</p></div><div class="gram"><h3>🔎 Command words</h3><p>To tell someone to do something, start with the action word. We do not say “I” or “you”.</p><div class="ex"><strong>Touch</strong> your head.</div><div class="ex"><strong>Pick up</strong> your pencil.</div><div class="ex"><strong>Sit</strong> down.</div><p class="small" style="margin-top:6px">Add “please” to be polite: “Open your book, please.”</p></div>
+
+<div class="code"><b>ALGORITHM A</b><br><em>Step 1:</em> Touch your head.<br><em>Step 2:</em> Point to the door.<br><b>END</b></div>
+<p>Start with two steps. If successful, add a third:</p>
+<div class="code"><b>LEVEL UP</b><br><em>Step 1:</em> Pick up your pencil.<br><em>Step 2:</em> Put it on the table.<br><em>Step 3:</em> Sit down.</div>
+<div class="box orange"><h3>Reverse the code</h3><p>Deniz becomes the programmer. He gives <strong>you</strong> two or three instructions. Follow them exactly. Make one funny mistake so he has to say: <strong>“No! Do this!”</strong></p></div>
+</div></div>
+
+<div class="card"><button class="acc">⭐ 6. Picture Talk — 5 minutes</button>
+<div class="panel">
+<div class="timebar"><span class="time">5 MIN</span><span class="time">SPEAKING</span></div>
+<div class="howto"><h3>📝 How to do it</h3><p><strong>Goal:</strong> Talk about a picture.</p><ol><li>Open the <strong>Visual Resources</strong> tab and find Picture Set B.</li><li>The teacher asks the questions one by one.</li><li>Deniz answers with a sentence. Perfect grammar is not needed: just keep talking!</li></ol><p class="line"><strong>Say:</strong> “I can see a boy.” “There is a computer.” “He is using the computer.”</p></div><div class="gram"><h3>🔎 I can see… / There is… / He is…</h3><p>Three easy patterns for talking about a picture.</p><div class="ex"><strong>I can see</strong> a boy.</div><div class="ex"><strong>There is</strong> a computer on the desk.</div><div class="ex"><strong>He is using</strong> the computer. (it is happening now)</div></div>
+
+<div class="instr">Open Visual Resources → Picture Talk. Use the child-at-computer picture.</div>
+<div class="speak"><strong>Ask:</strong> What can you see? • What is the boy doing? • What is on the desk? • Do you like computers? • What do you use a computer for?</div>
+<p class="small">Do not demand perfect grammar. Your goal is getting Deniz to keep talking.</p>
+</div></div>
+
+<div class="card"><button class="acc">🚀 7. Final Mission — 5 minutes</button>
+<div class="panel">
+<div class="timebar"><span class="time">5 MIN</span><span class="time">SPEAKING</span><span class="time">INDEPENDENCE</span></div>
+<div class="howto"><h3>📝 How to do it</h3><p><strong>Goal:</strong> Give a short introduction by yourself.</p><ol><li>Look at the five sentence starters.</li><li>Say your introduction to the teacher for 30–45 seconds.</li><li>Try not to look at Mum. The teacher gives one confidence point.</li></ol><p class="line"><strong>✅ Success:</strong> Deniz uses at least four of the five starters.</p></div><div class="gram"><h3>🔎 Remember the starters</h3><p>Use these small words to build your sentences.</p><div class="ex"><strong>My name is…</strong> &nbsp; <strong>I am…</strong> &nbsp; <strong>I like…</strong> &nbsp; <strong>I can…</strong> &nbsp; <strong>At school I…</strong></div></div>
+
+<div class="mission"><h3>LEVEL 1 UNLOCKED</h3>
+<p>Deniz gives a 30–45 second introduction using:</p>
+<ul><li>My name is...</li><li>I am ... years old.</li><li>I like...</li><li>I can...</li><li>At school I...</li></ul></div>
+<div class="box green"><h3>Finish</h3><p>“You completed the mission! You answered independently.” Give him one confidence point for <strong>trying without checking Mum</strong>.</p></div>
+</div></div>
+
+
+<div class="card"><button class="acc">📚 Full Week 1 Vocabulary Bank</button>
+<div class="panel">
+<div class="howto"><h3>📝 How to do it</h3><p><strong>Goal:</strong> Keep all the Week 1 words fresh.</p><ol><li>Read each word out loud.</li><li>Choose three words that feel hard and say each one in a sentence.</li><li>Then play the <strong>Memory Game</strong> tab to practise them with pictures.</li></ol></div>
+
+<div class="box purple"><h3>All 18 words</h3>
+<p class="small">Keep every one of these words in the weekly retrieval cycle.</p>
+<div class="wordbank"><span class="word">school</span><span class="word">class</span><span class="word">teacher</span><span class="word">friend</span><span class="word">book</span><span class="word">notebook</span><span class="word">pencil</span><span class="word">bag</span><span class="word">computer</span><span class="word">read</span><span class="word">write</span><span class="word">play</span><span class="word">learn</span><span class="word">morning</span><span class="word">break</span><span class="word">home</span><span class="word">go</span><span class="word">use</span></div></div>
+<p class="small">Use the <strong>Memory Game</strong> tab to practise them with pictures.</p>
+</div></div>
+
+</section>
+
+<section id="hw1" class="page">
+
+<div class="card">
+<button class="acc">🏠 Homework Mission 1 — My Profile</button>
+<div class="panel open">
+<div class="howto"><h3>📝 How to do your homework (5–10 minutes)</h3><ol><li>Complete the five sentences. Deniz writes or types the missing words himself.</li><li>Say all five sentences out loud to Mum.</li><li><strong>Memory bonus:</strong> Mum asks the five questions without showing the answers. Deniz answers from memory.</li></ol></div><div class="gram"><h3>🔎 Starters to remember</h3><p>Use these starters to finish each sentence.</p><div class="ex"><strong>My name is</strong> ___.</div><div class="ex"><strong>I am</strong> ___ <strong>years old</strong>.</div><div class="ex"><strong>I like</strong> ___.</div><div class="ex"><strong>My favourite colour is</strong> ___.</div><div class="ex"><strong>I can</strong> ___.</div></div>
+
+<div class="box cyan"><h3>Goal</h3><p>5–10 minutes. The aim is <strong>remembering and saying</strong>, not doing a lot of writing.</p></div>
+<div class="mission"><h3>💻 Build Your Player Profile</h3>
+<p>Deniz completes:</p>
+<ul>
+<li>My name is ______.</li>
+<li>I am ______ years old.</li>
+<li>I like ______.</li>
+<li>My favourite colour is ______.</li>
+<li>I can ______.</li>
+</ul>
+<p style="margin-top:7px"><strong>Then say all five sentences aloud to Mum.</strong></p></div>
+<div class="box yellow"><h3>Memory bonus ⭐</h3><p>Mum asks the questions without showing the answers. Deniz answers from memory.</p></div>
+</div></div>
+
+<div class="card">
+<button class="acc">🎮 Homework Game — 2-Step Robot</button>
+<div class="panel">
+<div class="howto"><h3>📝 How to play</h3><ol><li>Deniz gives Mum two English instructions.</li><li>Mum does them exactly.</li><li>Then Mum gives Deniz two instructions and Deniz does them.</li><li>Change the instructions each time to keep it fun.</li></ol></div><div class="gram"><h3>🔎 Start with an action word</h3><p>An instruction starts with the action word.</p><div class="ex"><strong>Stand</strong> up.</div><div class="ex"><strong>Touch</strong> the table.</div><div class="ex"><strong>Open</strong> your book.</div></div>
+
+<p>Deniz gives Mum two English instructions.</p>
+<div class="code"><b>EXAMPLE:</b><br>
+1. Stand up.<br>
+2. Touch the table.</div>
+<p>Then Mum gives Deniz two instructions. Keep it fun and change the commands.</p>
+</div></div>
+
+</section>
+
+
+<section id="memory" class="page">
+<div class="card"><button class="acc">🧠 Week 1 Vocabulary Memory Game</button><div class="panel open">
+<div class="box cyan"><h3>Look → Think → Type → Check</h3>
+<p>Deniz sees a picture and types the English word himself. <strong>The word is never shown on the picture.</strong></p></div>
+<div class="box yellow"><h3>How to play</h3><p>Show the picture → Deniz says the word → he types it → press <strong>Check</strong>. Give 1 point for each independent correct answer. Start with 6–8 pictures, then add more.</p></div>
+</div></div>
+<div class="card"><button class="acc">🎮 Picture Cards (18 words)</button><div class="panel open">
+<div class="howto"><h3>📝 How to do it</h3><p><strong>Goal:</strong> Remember every word and type it by yourself.</p><ol><li>Look at the picture. The word is <strong>not</strong> shown.</li><li>Say the English word out loud.</li><li>Type the word in the box under the picture.</li><li>Press <strong>Check my answers</strong>. Green is correct. Orange means look again.</li><li>Fix the orange ones and press Check again, or press <strong>Start again</strong> for a new round.</li></ol><p class="line"><strong>✅ Success:</strong> Deniz types most words correctly without help.</p></div>
+
+<div class="memory-grid"><div class="memory-card"><svg viewBox="0 0 180 110"><polygon points="90,16 28,48 152,48" fill="#f39c4a" stroke="#14213d" stroke-width="4"/><rect x="40" y="48" width="100" height="52" fill="#fff" stroke="#14213d" stroke-width="4"/><rect x="79" y="68" width="22" height="32" fill="#8a6d4b" stroke="#14213d" stroke-width="4"/><rect x="52" y="60" width="16" height="16" fill="#7ed6e8" stroke="#14213d" stroke-width="4"/><rect x="112" y="60" width="16" height="16" fill="#7ed6e8" stroke="#14213d" stroke-width="4"/><path d="M90 16V3" stroke="#14213d" stroke-width="4"/><path d="M90 3h18v9H90z" fill="#e85d5d" stroke="#14213d" stroke-width="2"/></svg><input type="text" data-answer="school" placeholder="Type the word..." autocomplete="off" autocapitalize="none" spellcheck="false"></div><div class="memory-card"><svg viewBox="0 0 180 110"><rect x="35" y="8" width="110" height="38" rx="3" fill="#6dbb5a" stroke="#14213d" stroke-width="4"/><path d="M50 22h40M50 33h60" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="40" cy="64" r="9" fill="#f4c7a1" stroke="#14213d" stroke-width="3"/><circle cx="90" cy="64" r="9" fill="#f4c7a1" stroke="#14213d" stroke-width="3"/><circle cx="140" cy="64" r="9" fill="#f4c7a1" stroke="#14213d" stroke-width="3"/><rect x="22" y="78" width="38" height="8" rx="2" fill="#f39c4a" stroke="#14213d" stroke-width="3"/><rect x="72" y="78" width="38" height="8" rx="2" fill="#f39c4a" stroke="#14213d" stroke-width="3"/><rect x="122" y="78" width="38" height="8" rx="2" fill="#f39c4a" stroke="#14213d" stroke-width="3"/><path d="M30 86v16M52 86v16M80 86v16M102 86v16M130 86v16M152 86v16" stroke="#14213d" stroke-width="3"/></svg><input type="text" data-answer="class" placeholder="Type the word..." autocomplete="off" autocapitalize="none" spellcheck="false"></div><div class="memory-card"><svg viewBox="0 0 180 110"><rect x="95" y="8" width="75" height="55" rx="3" fill="#6dbb5a" stroke="#14213d" stroke-width="4"/><path d="M106 24h40M106 38h52" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="32" r="16" fill="#f4c7a1" stroke="#14213d" stroke-width="3"/><path d="M22 100Q22 54 50 54Q78 54 78 100Z" fill="#00a8cc" stroke="#14213d" stroke-width="4"/><path d="M72 70L108 52" stroke="#14213d" stroke-width="5" stroke-linecap="round"/></svg><input type="text" data-answer="teacher" placeholder="Type the word..." autocomplete="off" autocapitalize="none" spellcheck="false"></div><div class="memory-card"><svg viewBox="0 0 180 110"><circle cx="55" cy="30" r="15" fill="#f4c7a1" stroke="#14213d" stroke-width="3"/><circle cx="125" cy="30" r="15" fill="#f4c7a1" stroke="#14213d" stroke-width="3"/><path d="M32 98Q32 52 55 52Q78 52 78 98Z" fill="#f39c4a" stroke="#14213d" stroke-width="4"/><path d="M102 98Q102 52 125 52Q148 52 148 98Z" fill="#7667c7" stroke="#14213d" stroke-width="4"/><path d="M76 72Q90 82 104 72" fill="none" stroke="#14213d" stroke-width="6" stroke-linecap="round"/></svg><input type="text" data-answer="friend" placeholder="Type the word..." autocomplete="off" autocapitalize="none" spellcheck="false"></div><div class="memory-card"><svg viewBox="0 0 180 110"><path d="M30 26Q75 14 90 30V90Q65 74 30 84Z" fill="#fff" stroke="#14213d" stroke-width="4"/><path d="M150 26Q105 14 90 30V90Q115 74 150 84Z" fill="#fff" stroke="#14213d" stroke-width="4"/><path d="M42 40q20-4 38 4M42 54q20-4 38 4M138 40q-20-4-38 4M138 54q-20-4-38 4" fill="none" stroke="#9aa8ad" stroke-width="3"/></svg><input type="text" data-answer="book" placeholder="Type the word..." autocomplete="off" autocapitalize="none" spellcheck="false"></div><div class="memory-card"><svg viewBox="0 0 180 110"><rect x="52" y="10" width="76" height="90" rx="5" fill="#00a8cc" stroke="#14213d" stroke-width="4"/><path d="M72 36H116M72 50H116M72 64H116M72 78H104" stroke="#fff" stroke-width="4" stroke-linecap="round"/><circle cx="52" cy="26" r="5" fill="#fff" stroke="#14213d" stroke-width="3"/><circle cx="52" cy="46" r="5" fill="#fff" stroke="#14213d" stroke-width="3"/><circle cx="52" cy="66" r="5" fill="#fff" stroke="#14213d" stroke-width="3"/><circle cx="52" cy="86" r="5" fill="#fff" stroke="#14213d" stroke-width="3"/></svg><input type="text" data-answer="notebook" placeholder="Type the word..." autocomplete="off" autocapitalize="none" spellcheck="false"></div><div class="memory-card"><svg viewBox="0 0 180 110"><g transform="rotate(-25 90 55)"><rect x="42" y="46" width="90" height="18" rx="3" fill="#f6c945" stroke="#14213d" stroke-width="4"/><polygon points="42,46 42,64 20,55" fill="#f0d2ae" stroke="#14213d" stroke-width="4"/><polygon points="20,55 28,51 28,59" fill="#14213d"/><rect x="126" y="46" width="18" height="18" fill="#f39c4a" stroke="#14213d" stroke-width="4"/></g></svg><input type="text" data-answer="pencil" placeholder="Type the word..." autocomplete="off" autocapitalize="none" spellcheck="false"></div><div class="memory-card"><svg viewBox="0 0 180 110"><path d="M60 38Q90 8 120 38" fill="none" stroke="#14213d" stroke-width="8"/><rect x="45" y="35" width="90" height="64" rx="12" fill="#7667c7" stroke="#14213d" stroke-width="4"/><rect x="66" y="66" width="48" height="22" rx="6" fill="#f6c945" stroke="#14213d" stroke-width="4"/><path d="M45 56h90" stroke="#14213d" stroke-width="3"/></svg><input type="text" data-answer="bag" placeholder="Type the word..." autocomplete="off" autocapitalize="none" spellcheck="false"></div><div class="memory-card"><svg viewBox="0 0 180 110"><rect x="40" y="10" width="100" height="64" rx="6" fill="#4a5d7a" stroke="#14213d" stroke-width="4"/><rect x="48" y="18" width="84" height="48" fill="#7ed6e8"/><path d="M90 74v14" stroke="#14213d" stroke-width="8"/><rect x="62" y="88" width="56" height="8" rx="4" fill="#4a5d7a" stroke="#14213d" stroke-width="4"/></svg><input type="text" data-answer="computer" placeholder="Type the word..." autocomplete="off" autocapitalize="none" spellcheck="false"></div><div class="memory-card"><svg viewBox="0 0 180 110"><circle cx="90" cy="24" r="16" fill="#f4c7a1" stroke="#14213d" stroke-width="3"/><path d="M82 24h.1M98 24h.1" stroke="#14213d" stroke-width="4" stroke-linecap="round"/><path d="M26 54Q58 46 90 58V102Q58 90 26 98Z" fill="#fff" stroke="#14213d" stroke-width="4"/><path d="M154 54Q122 46 90 58V102Q122 90 154 98Z" fill="#fff" stroke="#14213d" stroke-width="4"/><path d="M38 68q18-3 40 3M38 80q18-3 40 3M142 68q-18-3-40 3M142 80q-18-3-40 3" fill="none" stroke="#9aa8ad" stroke-width="3"/></svg><input type="text" data-answer="read" placeholder="Type the word..." autocomplete="off" autocapitalize="none" spellcheck="false"></div><div class="memory-card"><svg viewBox="0 0 180 110"><rect x="38" y="12" width="84" height="88" fill="#fff" stroke="#14213d" stroke-width="4"/><path d="M52 34q8-8 16 0t16 0t16 0M52 54q8-8 16 0t16 0M52 74q8-8 16 0" fill="none" stroke="#7667c7" stroke-width="3"/><g transform="rotate(-40 130 60)"><rect x="100" y="54" width="60" height="12" rx="3" fill="#f6c945" stroke="#14213d" stroke-width="3"/><polygon points="100,54 100,66 88,60" fill="#f0d2ae" stroke="#14213d" stroke-width="3"/></g></svg><input type="text" data-answer="write" placeholder="Type the word..." autocomplete="off" autocapitalize="none" spellcheck="false"></div><div class="memory-card"><svg viewBox="0 0 180 110"><circle cx="62" cy="24" r="14" fill="#f4c7a1" stroke="#14213d" stroke-width="3"/><path d="M62 38L62 70M62 48L40 62M62 48L84 40M62 70L46 98M62 70L96 84" stroke="#14213d" stroke-width="7" stroke-linecap="round" fill="none"/><circle cx="128" cy="84" r="16" fill="#fff" stroke="#14213d" stroke-width="4"/><path d="M122 80l6-4 6 4-2 7h-8z" fill="#14213d"/><path d="M104 70l8 6M110 56l10 8" stroke="#9aa8ad" stroke-width="3" stroke-linecap="round"/></svg><input type="text" data-answer="play" placeholder="Type the word..." autocomplete="off" autocapitalize="none" spellcheck="false"></div><div class="memory-card"><svg viewBox="0 0 180 110"><circle cx="90" cy="24" r="15" fill="#f6c945" stroke="#14213d" stroke-width="4"/><rect x="83" y="39" width="14" height="9" rx="2" fill="#9aa8ad" stroke="#14213d" stroke-width="3"/><path d="M90 0v4M62 12l5 4M118 12l-5 4M56 28h5M124 28h-5" stroke="#f39c4a" stroke-width="3" stroke-linecap="round"/><circle cx="90" cy="72" r="20" fill="#f4c7a1" stroke="#14213d" stroke-width="3"/><path d="M82 70h.1M98 70h.1" stroke="#14213d" stroke-width="4" stroke-linecap="round"/><path d="M82 80q8 6 16 0" fill="none" stroke="#14213d" stroke-width="3" stroke-linecap="round"/></svg><input type="text" data-answer="learn" placeholder="Type the word..." autocomplete="off" autocapitalize="none" spellcheck="false"></div><div class="memory-card"><svg viewBox="0 0 180 110"><rect width="180" height="110" fill="#fdeedb"/><circle cx="90" cy="70" r="26" fill="#f6c945" stroke="#14213d" stroke-width="4"/><path d="M90 28v-14M56 42l-10-10M124 42l10-10M36 70H20M160 70h-16" stroke="#f39c4a" stroke-width="5" stroke-linecap="round"/><path d="M0 76Q45 58 90 76T180 76V110H0Z" fill="#6dbb5a" stroke="#14213d" stroke-width="4"/></svg><input type="text" data-answer="morning" placeholder="Type the word..." autocomplete="off" autocapitalize="none" spellcheck="false"></div><div class="memory-card"><svg viewBox="0 0 180 110"><rect x="26" y="46" width="76" height="48" rx="8" fill="#00a8cc" stroke="#14213d" stroke-width="4"/><path d="M42 46Q42 30 64 30Q86 30 86 46" fill="none" stroke="#14213d" stroke-width="5"/><rect x="50" y="62" width="28" height="12" rx="3" fill="#fff" stroke="#14213d" stroke-width="3"/><circle cx="132" cy="68" r="22" fill="#e85d5d" stroke="#14213d" stroke-width="4"/><path d="M132 46q4-12 14-12" fill="none" stroke="#14213d" stroke-width="4" stroke-linecap="round"/><path d="M132 48q-8-10-18-4q6 10 18 4z" fill="#6dbb5a" stroke="#14213d" stroke-width="3"/></svg><input type="text" data-answer="break" placeholder="Type the word..." autocomplete="off" autocapitalize="none" spellcheck="false"></div><div class="memory-card"><svg viewBox="0 0 180 110"><polygon points="90,10 28,52 152,52" fill="#7667c7" stroke="#14213d" stroke-width="4"/><rect x="125" y="14" width="14" height="24" fill="#f39c4a" stroke="#14213d" stroke-width="4"/><rect x="42" y="50" width="96" height="52" fill="#fff" stroke="#14213d" stroke-width="4"/><rect x="80" y="68" width="22" height="34" fill="#8a6d4b" stroke="#14213d" stroke-width="4"/><rect x="52" y="62" width="18" height="18" fill="#7ed6e8" stroke="#14213d" stroke-width="4"/><rect x="112" y="62" width="18" height="18" fill="#7ed6e8" stroke="#14213d" stroke-width="4"/></svg><input type="text" data-answer="home" placeholder="Type the word..." autocomplete="off" autocapitalize="none" spellcheck="false"></div><div class="memory-card"><svg viewBox="0 0 180 110"><circle cx="46" cy="24" r="14" fill="#f4c7a1" stroke="#14213d" stroke-width="3"/><path d="M46 38V68M46 48L30 62M46 48L62 60M46 68L28 98M46 68L64 98" stroke="#14213d" stroke-width="7" stroke-linecap="round" fill="none"/><path d="M92 62H150M132 44L152 62L132 80" fill="none" stroke="#00a8cc" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 40h12M4 56h14" stroke="#9aa8ad" stroke-width="3" stroke-linecap="round"/></svg><input type="text" data-answer="go" placeholder="Type the word..." autocomplete="off" autocapitalize="none" spellcheck="false"></div><div class="memory-card"><svg viewBox="0 0 180 110"><rect x="38" y="14" width="104" height="80" rx="10" fill="#4a5d7a" stroke="#14213d" stroke-width="4"/><rect x="47" y="23" width="86" height="62" rx="3" fill="#7ed6e8"/><circle cx="76" cy="52" r="10" fill="#f6c945"/><circle cx="108" cy="46" r="8" fill="#6dbb5a"/><path d="M118 108V88Q118 78 128 78Q136 78 136 88L136 70L156 76" fill="none" stroke="#f0c39c" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg><input type="text" data-answer="use" placeholder="Type the word..." autocomplete="off" autocapitalize="none" spellcheck="false"></div></div>
+<div class="memory-buttons">
+<button class="showanswers" onclick="checkMemory(this)">✅ Check my answers</button>
+<button class="showanswers reset" onclick="resetMemory(this)">🔄 Start again</button>
+</div>
+<p class="memory-score small">Correct: 0 / 18</p>
+<div class="box purple" style="margin-top:10px"><h3>🔒 Teacher Answer Key</h3>
+<button class="showanswers" onclick="toggleAnswers(this)">Show Answer Key</button>
+<div class="answer">1. school • 2. class • 3. teacher • 4. friend • 5. book • 6. notebook • 7. pencil • 8. bag • 9. computer • 10. read • 11. write • 12. play • 13. learn • 14. morning • 15. break • 16. home • 17. go • 18. use</div></div>
+<div class="box green"><h3>⭐ Score</h3><p>Independent correct: ______ / 18 &nbsp;&nbsp; Second tries: ______</p></div>
+</div></div>
+</section>
+<section id="l2" class="page">
+
+<div class="card"><button class="acc">🔵 1. Memory Blast — 5 minutes</button>
+<div class="panel open">
+<div class="timebar"><span class="time">5 MIN</span><span class="time">RETRIEVAL</span></div>
+<div class="howto"><h3>📝 How to do it</h3><p><strong>Goal:</strong> Remember the Week 1 words before learning anything new.</p><ol><li>Open the <strong>Memory Game</strong> tab and show six to eight pictures.</li><li>Deniz says each word, types it, and makes a short sentence.</li><li>Finish with the picture he found hardest.</li></ol><p class="line"><strong>Say:</strong> “I have a bag.” “I can read.”</p></div>
+
+<div class="instr">No teaching. Open the <strong>Memory Game</strong> tab. Show 6–8 pictures. Deniz says the word, types it, then makes a short sentence.</div>
+<div class="speak"><strong>Then ask:</strong> What did you do at school today? • What do you like? • What can you do? • Tell me one new thing you learned.</div>
+<p class="small">Finish with one picture Deniz found difficult in Week 1.</p>
+</div></div>
+
+<div class="card"><button class="acc">🔎 2. Word Detective — 6 minutes</button>
+<div class="panel">
+<div class="timebar"><span class="time">6 MIN</span><span class="time">VOCABULARY</span><span class="time">SORTING</span></div>
+<div class="howto"><h3>📝 How to do it</h3><p><strong>Goal:</strong> Tell the difference between things and actions.</p><ol><li>Read each word out loud.</li><li>Decide: is it a <strong>thing</strong> (you can touch it) or an <strong>action</strong> (you can do it)?</li><li>Make a sentence: a thing → “I have a ___.” An action → “I can ___.”</li><li>Press <strong>Show Answers</strong> to check.</li></ol><p class="line"><strong>✅ Success:</strong> Deniz sorts at least eight of the ten words correctly.</p></div><div class="gram"><h3>🔎 Things and actions</h3><p>English has two big kinds of words. Things are called <strong>nouns</strong>. Actions are called <strong>verbs</strong>.</p><div class="ex">Things: pencil, bag, computer → I have <strong>a</strong> pencil.</div><div class="ex">Actions: read, play, write → I <strong>can</strong> read.</div></div>
+
+<div class="instr">Read each word aloud. Deniz says: <strong>“Thing”</strong> (I can touch it) or <strong>“Action”</strong> (I can do it).</div>
+<div class="wordbank"><span class="word">pencil</span><span class="word">read</span><span class="word">bag</span><span class="word">play</span><span class="word">teacher</span><span class="word">write</span><span class="word">computer</span><span class="word">go</span><span class="word">notebook</span><span class="word">use</span></div>
+<div class="box green"><h3>Make it a sentence</h3><p>Thing → “I have a ______.” &nbsp; Action → “I can ______.”</p></div>
+<button class="showanswers" onclick="toggleAnswers(this)">Show Answers</button>
+<div class="answer">Things: pencil, bag, teacher, computer, notebook • Actions: read, play, write, go, use</div>
+</div></div>
+
+<div class="card"><button class="acc">📖 3. Read & Answer — 8 minutes</button>
+<div class="panel">
+<div class="timebar"><span class="time">8 MIN</span><span class="time">READING</span><span class="time">COMPREHENSION</span></div>
+<div class="howto"><h3>📝 How to do it</h3><p><strong>Goal:</strong> Understand a short story and find the answers in it.</p><ol><li>The teacher reads the story. Deniz listens and follows with his finger.</li><li>Deniz reads it again, quietly or aloud.</li><li>Type the answers in the boxes.</li><li>For each answer, point to the sentence in the story that shows it.</li></ol><p class="line"><strong>✅ Success:</strong> Deniz answers all four questions and can point to the evidence.</p></div><div class="gram"><h3>🔎 Question words</h3><p>The first word of the question tells you what kind of answer to look for.</p><div class="ex"><strong>Where</strong>…? → a place</div><div class="ex"><strong>What</strong>…? → a thing</div><div class="ex"><strong>Who</strong>…? → a person</div></div>
+
+<div class="box cyan"><h3>Mini Story: The Lost Pencil</h3>
+<p>It is morning. Deniz opens his bag. His pencil is not there! He looks in his notebook. No pencil. He asks his friend, “Do you have a pencil?” His friend says, “Yes, I do!” Deniz says, “Thank you!” Now he can write in class.</p></div>
+<div class="q">1. What does Deniz open? <input placeholder="answer"></div>
+<div class="q">2. What is not in the bag? <input placeholder="answer"></div>
+<div class="q">3. Who does Deniz ask? <input placeholder="answer"></div>
+<div class="q">4. What can Deniz do now? <input placeholder="answer"></div>
+<div class="box purple"><h3>Find it in the text</h3><p>Deniz points to the sentence that gives each answer. Then ask: <strong>“What would you do?”</strong></p></div>
+</div></div>
+
+<div class="card"><button class="acc">❓ 4. Question Time — 7 minutes</button>
+<div class="panel">
+<div class="timebar"><span class="time">7 MIN</span><span class="time">SPEAKING</span><span class="time">LISTENING</span></div>
+<div class="howto"><h3>📝 How to do it</h3><p><strong>Goal:</strong> Ask and answer short questions.</p><ol><li>The teacher asks a question.</li><li>Deniz gives a short answer: “Yes, I do.” or “No, I don't.” (or “Yes, I can.” / “No, I can't.”)</li><li><strong>Reverse it:</strong> Deniz asks the teacher five questions and the teacher gives a short answer.</li></ol><p class="line"><strong>✅ Success:</strong> Deniz asks at least three questions by himself.</p></div><div class="gram"><h3>🔎 Do you…? and Can you…?</h3><p>Use <strong>Do you</strong> for things you have or like. Use <strong>Can you</strong> for things you are able to do.</p><div class="ex"><strong>Do you</strong> have a pencil? → Yes, <strong>I do</strong>. / No, <strong>I don't</strong>.</div><div class="ex"><strong>Can you</strong> write? → Yes, <strong>I can</strong>. / No, <strong>I can't</strong>.</div><p class="small" style="margin-top:6px">The short answer repeats the helping word: Do → I do, Can → I can.</p></div>
+
+<div class="box yellow"><h3>Ask → Answer</h3>
+<p><strong>Do you</strong> have a pencil? → <strong>Yes, I do.</strong> / <strong>No, I don't.</strong></p>
+<p><strong>Can you</strong> read? → <strong>Yes, I can.</strong> / <strong>No, I can't.</strong></p></div>
+<div class="speak"><strong>Teacher asks:</strong> Do you have a bag? • Do you like school? • Do you play with friends? • Can you write? • Can you use a computer?</div>
+<div class="box orange"><h3>Reverse it</h3><p>Deniz asks <strong>you</strong> five questions using “Do you…?” or “Can you…?”. Answer with a short answer. Make one funny answer!</p></div>
+</div></div>
+
+<div class="card"><button class="acc">🟣 5. Present Simple: I and He — 7 minutes</button>
+<div class="panel">
+<div class="timebar"><span class="time">7 MIN</span><span class="time">GRAMMAR</span></div>
+<div class="howto"><h3>📝 How to do it</h3><p><strong>Goal:</strong> Add -s when we talk about he or she.</p><ol><li>Read the pattern in the purple box.</li><li>Type the correct word for “he” in each sentence.</li><li>Press <strong>Show Answers</strong> and check.</li><li>Point to a picture in the Memory Game tab and say what “he” does.</li></ol><p class="line"><strong>✅ Success:</strong> Deniz types at least four of the five verbs correctly.</p></div><div class="gram"><h3>🔎 I play → he plays</h3><p>With <strong>I</strong> the verb stays the same. With <strong>he</strong> or <strong>she</strong> it usually gets an <strong>-s</strong>.</p><div class="ex">I play → he <strong>plays</strong></div><div class="ex">I write → he <strong>writes</strong></div><div class="ex">I use → he <strong>uses</strong></div><div class="ex">I go → he <strong>goes</strong> (-es, because go ends with o)</div></div>
+
+<div class="box purple"><h3>Notice the pattern</h3><p><strong>I</strong> go to school. → <strong>He goes</strong> to school.</p><p><strong>I</strong> read a book. → <strong>He reads</strong> a book.</p></div>
+<div class="q">1. I play. He <input data-answer="plays" placeholder="verb"> .</div>
+<div class="q">2. I write. He <input data-answer="writes" placeholder="verb"> .</div>
+<div class="q">3. I use a computer. He <input data-answer="uses" placeholder="verb"> a computer.</div>
+<div class="q">4. I go home. He <input data-answer="goes" placeholder="verb"> home.</div>
+<div class="q">5. I learn English. He <input data-answer="learns" placeholder="verb"> English.</div>
+<button class="showanswers" onclick="toggleAnswers(this)">Show Answers</button>
+<div class="answer">1 plays • 2 writes • 3 uses • 4 goes • 5 learns</div>
+<p class="small" style="margin-top:8px">After checking, point to a picture in the Memory Game tab and ask Deniz to say what “he” does.</p>
+</div></div>
+
+<div class="card"><button class="acc">🎯 6. Follow the Algorithm — 5 minutes</button>
+<div class="panel">
+<div class="timebar"><span class="time">5 MIN</span><span class="time">LISTENING</span><span class="time">MOVEMENT</span></div>
+<div class="howto"><h3>📝 How to do it</h3><p><strong>Goal:</strong> Listen to three steps and do them in order.</p><ol><li>The teacher says an algorithm once.</li><li>Deniz does every step in order.</li><li><strong>Deniz is the programmer:</strong> he gives the teacher a 3-step algorithm. The teacher makes one mistake and Deniz says “No! Do this!”</li></ol><p class="line"><strong>✅ Success:</strong> Deniz does a 3-step algorithm correctly.</p></div><div class="gram"><h3>🔎 Three steps in a row</h3><p>Each step starts with an action word. The order matters!</p><div class="ex"><strong>Open</strong> your bag. → <strong>Take out</strong> your notebook. → <strong>Put</strong> it on the table.</div></div>
+
+<div class="code"><b>ALGORITHM A</b><br><em>1.</em> Open your bag.<br><em>2.</em> Take out your notebook.<br><em>3.</em> Put it on the table.</div>
+<div class="code"><b>ALGORITHM B</b><br><em>1.</em> Stand up.<br><em>2.</em> Go to the door.<br><em>3.</em> Touch the door and sit down.</div>
+<div class="box orange"><h3>Deniz is the programmer</h3><p>Deniz gives <strong>you</strong> a 3-step algorithm. Follow it exactly. Make one mistake so he says: <strong>“No! Do this!”</strong></p></div>
+</div></div>
+
+<div class="card"><button class="acc">🚀 7. Speaking Mission — 7 minutes</button>
+<div class="panel">
+<div class="timebar"><span class="time">7 MIN</span><span class="time">SPEAKING</span><span class="time">CONFIDENCE</span></div>
+<div class="howto"><h3>📝 How to do it</h3><p><strong>Goal:</strong> Tell the teacher about your day.</p><ol><li>Look at the five starters.</li><li>Think for 20 seconds.</li><li>Speak for 45–60 seconds. Use at least five Week 1 words.</li><li>The teacher asks one surprise question. Answer by yourself!</li></ol><p class="line"><strong>Say:</strong> “In the morning, I… At school, I… My friend and I… I can… At home, I…”</p><p class="line"><strong>✅ Success:</strong> Deniz speaks for about a minute with little help.</p></div><div class="gram"><h3>🔎 I + action, no -s</h3><p>When Deniz talks about himself, the action word stays the same. My friend and I is also “we”, so no -s.</p><div class="ex">I <strong>go</strong> to school.</div><div class="ex">My friend and I <strong>play</strong>.</div><div class="ex">I <strong>read</strong> a book.</div></div>
+
+<div class="mission"><h3>LEVEL 2: MY DAY</h3>
+<p>Deniz speaks for 45–60 seconds using at least 5 Week 1 words.</p>
+<ul><li>In the morning, I...</li><li>At school, I...</li><li>My friend and I...</li><li>I can...</li><li>At home, I...</li></ul></div>
+<div class="box green"><h3>Teacher assessment</h3><p>Vocabulary: □ independent □ prompted &nbsp; Speaking: □ independent □ prompted &nbsp; Instructions: □ 2-step □ 3-step &nbsp; Reading: □ secure □ support</p></div>
+<div class="box orange"><h3>Surprise question</h3><p>Ask: <strong>“What do you do at home?”</strong> Give him thinking time. Praise an independent answer even if it contains mistakes.</p></div>
+</div></div>
+
+</section>
+
+<section id="hw2" class="page">
+
+<div class="card">
+<button class="acc">🏠 Homework Mission 2 — My Day</button>
+<div class="panel open">
+<div class="howto"><h3>📝 How to do your homework (5–10 minutes)</h3><ol><li>Complete the five sentences about your day. Deniz writes the missing words himself.</li><li><strong>Part B:</strong> read the sentences once, then say them again <strong>without reading</strong>.</li><li><strong>Bonus:</strong> play the Memory Game tab for five minutes.</li></ol></div><div class="gram"><h3>🔎 I + action</h3><p>After <strong>I</strong> and <strong>My friend and I</strong> the action word does not change.</p><div class="ex">In the morning, I <strong>wake up</strong>.</div><div class="ex">At school, I <strong>read</strong>.</div><div class="ex">At home, I <strong>play</strong>.</div></div>
+
+<div class="box cyan"><h3>Part A — Complete</h3>
+<div class="q">In the morning, I __________.</div>
+<div class="q">At school, I __________.</div>
+<div class="q">My friend and I __________.</div>
+<div class="q">At home, I __________.</div>
+<div class="q">I can __________.</div>
+</div>
+<div class="box green"><h3>Part B — Say it!</h3>
+<p>Deniz reads his five sentences once. Then he says them again <strong>without reading</strong>.</p></div>
+<div class="box yellow"><h3>Memory bonus ⭐</h3><p>Play the <strong>Memory Game</strong> tab for 5 minutes. Try to type more words by yourself than last time.</p></div>
+</div></div>
+
+<div class="card">
+<button class="acc">💻 Homework Game — He / She Detective</button>
+<div class="panel">
+<div class="howto"><h3>📝 How to play</h3><ol><li>Deniz thinks of someone he knows, for example a friend.</li><li>He tells Mum three sentences about that person.</li><li>Mum asks one question. Deniz answers with a short answer.</li></ol></div><div class="gram"><h3>🔎 He + action with -s</h3><p>When we talk about one other person we add -s to the action word.</p><div class="ex">My friend <strong>plays</strong> football.</div><div class="ex">He <strong>goes</strong> to school.</div><div class="ex">He <strong>reads</strong> books.</div><p class="small" style="margin-top:6px">Mum asks: “Do you like football?” Deniz answers: “Yes, I do.” or “No, I don't.”</p></div>
+
+<p>Deniz tells Mum three sentences about someone he knows.</p>
+<div class="code"><b>EXAMPLE:</b><br>My friend plays football.<br>He goes to school.<br>He reads books.</div>
+<p class="small">Mum asks: “Do you like football?” Deniz answers with “Yes, I do.” or “No, I don't.”</p>
+</div></div>
+
+<div class="card">
+<button class="acc">⭐ Parent note</button>
+<div class="panel">
+<div class="box purple"><h3>What Mum should do</h3>
+<p>When Deniz is answering, give him time. If he looks for reassurance, smile and say:</p>
+<p><strong>“You can answer. Think first.”</strong></p>
+<p>A correct answer is wonderful, but <strong>an independent answer is the real goal</strong>.</p></div>
+</div></div>
+
+</section>
+
+<section id="resources" class="page">
+
+<div class="card"><button class="acc">🖼️ Visual Resources — how to use this tab</button>
+<div class="panel open">
+<div class="box cyan"><h3>All lesson pictures are here</h3>
+<p>Use these visuals directly from the screen during the lesson. You do not need to search for or prepare separate pictures for the activities in Week 1.</p></div>
+<div class="box yellow"><h3>Teacher rule</h3><p>If a future lesson asks you to “use the pictures”, the lesson will have a matching <strong>Visual Resources</strong> tab containing the actual visuals required.</p></div>
+</div></div>
+
+<div class="card"><button class="acc">💻 Picture Set A — School & Computer Objects</button>
+<div class="panel">
+<div class="resource-grid">
+<div class="picture-card">
+<svg viewBox="0 0 180 120" role="img" aria-label="computer"><rect x="35" y="18" width="110" height="70" rx="6" fill="#14213d"/><rect x="43" y="26" width="94" height="54" rx="3" fill="#78d9ef"/><path d="M75 99h30M90 88v11M55 99h70" stroke="#14213d" stroke-width="7" stroke-linecap="round"/><circle cx="90" cy="53" r="13" fill="#f6c945"/><path d="M84 53h12M90 47v12" stroke="#14213d" stroke-width="3"/></svg>
+<div class="caption">COMPUTER</div><div class="prompt">What is it? What do you use it for?</div></div>
+
+<div class="picture-card">
+<svg viewBox="0 0 180 120" role="img" aria-label="book"><rect x="31" y="24" width="55" height="72" rx="5" fill="#00a8cc"/><rect x="94" y="24" width="55" height="72" rx="5" fill="#6dbb5a"/><path d="M90 25v71" stroke="#14213d" stroke-width="5"/><path d="M43 40h30M43 51h30M105 40h30M105 51h30" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>
+<div class="caption">BOOK</div><div class="prompt">What colour is it? Can you read?</div></div>
+
+<div class="picture-card">
+<svg viewBox="0 0 180 120" role="img" aria-label="pencil"><path d="M38 84L115 22l18 22-77 62z" fill="#f6c945"/><path d="M115 22l11-9 18 22-11 9z" fill="#f39c4a"/><path d="M38 84l-4 23 22-9z" fill="#f4d7b0"/><path d="M45 78l77-62" stroke="#14213d" stroke-width="3"/></svg>
+<div class="caption">PENCIL</div><div class="prompt">Pick it up. Put it down.</div></div>
+
+<div class="picture-card">
+<svg viewBox="0 0 180 120" role="img" aria-label="school bag"><path d="M48 42h84v59H48z" fill="#7667c7" rx="12"/><path d="M69 42c0-25 42-25 42 0" fill="none" stroke="#14213d" stroke-width="8"/><rect x="64" y="64" width="52" height="22" rx="8" fill="#f6c945"/><circle cx="90" cy="75" r="4" fill="#14213d"/></svg>
+<div class="caption">BAG</div><div class="prompt">What is in your bag?</div></div>
+<div class="picture-card"><svg role="img" aria-label="school" viewBox="0 0 180 110"><polygon points="90,16 28,48 152,48" fill="#f39c4a" stroke="#14213d" stroke-width="4"/><rect x="40" y="48" width="100" height="52" fill="#fff" stroke="#14213d" stroke-width="4"/><rect x="79" y="68" width="22" height="32" fill="#8a6d4b" stroke="#14213d" stroke-width="4"/><rect x="52" y="60" width="16" height="16" fill="#7ed6e8" stroke="#14213d" stroke-width="4"/><rect x="112" y="60" width="16" height="16" fill="#7ed6e8" stroke="#14213d" stroke-width="4"/><path d="M90 16V3" stroke="#14213d" stroke-width="4"/><path d="M90 3h18v9H90z" fill="#e85d5d" stroke="#14213d" stroke-width="2"/></svg><div class="caption">SCHOOL</div><div class="prompt">Where do you go in the morning?</div></div><div class="picture-card"><svg role="img" aria-label="teacher" viewBox="0 0 180 110"><rect x="95" y="8" width="75" height="55" rx="3" fill="#6dbb5a" stroke="#14213d" stroke-width="4"/><path d="M106 24h40M106 38h52" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="32" r="16" fill="#f4c7a1" stroke="#14213d" stroke-width="3"/><path d="M22 100Q22 54 50 54Q78 54 78 100Z" fill="#00a8cc" stroke="#14213d" stroke-width="4"/><path d="M72 70L108 52" stroke="#14213d" stroke-width="5" stroke-linecap="round"/></svg><div class="caption">TEACHER</div><div class="prompt">Who is this? What does the teacher do?</div></div><div class="picture-card"><svg role="img" aria-label="friend" viewBox="0 0 180 110"><circle cx="55" cy="30" r="15" fill="#f4c7a1" stroke="#14213d" stroke-width="3"/><circle cx="125" cy="30" r="15" fill="#f4c7a1" stroke="#14213d" stroke-width="3"/><path d="M32 98Q32 52 55 52Q78 52 78 98Z" fill="#f39c4a" stroke="#14213d" stroke-width="4"/><path d="M102 98Q102 52 125 52Q148 52 148 98Z" fill="#7667c7" stroke="#14213d" stroke-width="4"/><path d="M76 72Q90 82 104 72" fill="none" stroke="#14213d" stroke-width="6" stroke-linecap="round"/></svg><div class="caption">FRIEND</div><div class="prompt">Who do you play with?</div></div><div class="picture-card"><svg role="img" aria-label="read" viewBox="0 0 180 110"><circle cx="90" cy="24" r="16" fill="#f4c7a1" stroke="#14213d" stroke-width="3"/><path d="M82 24h.1M98 24h.1" stroke="#14213d" stroke-width="4" stroke-linecap="round"/><path d="M26 54Q58 46 90 58V102Q58 90 26 98Z" fill="#fff" stroke="#14213d" stroke-width="4"/><path d="M154 54Q122 46 90 58V102Q122 90 154 98Z" fill="#fff" stroke="#14213d" stroke-width="4"/><path d="M38 68q18-3 40 3M38 80q18-3 40 3M142 68q-18-3-40 3M142 80q-18-3-40 3" fill="none" stroke="#9aa8ad" stroke-width="3"/></svg><div class="caption">READ</div><div class="prompt">What do you read?</div></div><div class="picture-card"><svg role="img" aria-label="write" viewBox="0 0 180 110"><rect x="38" y="12" width="84" height="88" fill="#fff" stroke="#14213d" stroke-width="4"/><path d="M52 34q8-8 16 0t16 0t16 0M52 54q8-8 16 0t16 0M52 74q8-8 16 0" fill="none" stroke="#7667c7" stroke-width="3"/><g transform="rotate(-40 130 60)"><rect x="100" y="54" width="60" height="12" rx="3" fill="#f6c945" stroke="#14213d" stroke-width="3"/><polygon points="100,54 100,66 88,60" fill="#f0d2ae" stroke="#14213d" stroke-width="3"/></g></svg><div class="caption">WRITE</div><div class="prompt">What do you write with?</div></div><div class="picture-card"><svg role="img" aria-label="play" viewBox="0 0 180 110"><circle cx="62" cy="24" r="14" fill="#f4c7a1" stroke="#14213d" stroke-width="3"/><path d="M62 38L62 70M62 48L40 62M62 48L84 40M62 70L46 98M62 70L96 84" stroke="#14213d" stroke-width="7" stroke-linecap="round" fill="none"/><circle cx="128" cy="84" r="16" fill="#fff" stroke="#14213d" stroke-width="4"/><path d="M122 80l6-4 6 4-2 7h-8z" fill="#14213d"/><path d="M104 70l8 6M110 56l10 8" stroke="#9aa8ad" stroke-width="3" stroke-linecap="round"/></svg><div class="caption">PLAY</div><div class="prompt">What do you play?</div></div><div class="picture-card"><svg role="img" aria-label="go" viewBox="0 0 180 110"><circle cx="46" cy="24" r="14" fill="#f4c7a1" stroke="#14213d" stroke-width="3"/><path d="M46 38V68M46 48L30 62M46 48L62 60M46 68L28 98M46 68L64 98" stroke="#14213d" stroke-width="7" stroke-linecap="round" fill="none"/><path d="M92 62H150M132 44L152 62L132 80" fill="none" stroke="#00a8cc" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 40h12M4 56h14" stroke="#9aa8ad" stroke-width="3" stroke-linecap="round"/></svg><div class="caption">GO</div><div class="prompt">Where do you go?</div></div><div class="picture-card"><svg role="img" aria-label="learn" viewBox="0 0 180 110"><circle cx="90" cy="24" r="15" fill="#f6c945" stroke="#14213d" stroke-width="4"/><rect x="83" y="39" width="14" height="9" rx="2" fill="#9aa8ad" stroke="#14213d" stroke-width="3"/><path d="M90 0v4M62 12l5 4M118 12l-5 4M56 28h5M124 28h-5" stroke="#f39c4a" stroke-width="3" stroke-linecap="round"/><circle cx="90" cy="72" r="20" fill="#f4c7a1" stroke="#14213d" stroke-width="3"/><path d="M82 70h.1M98 70h.1" stroke="#14213d" stroke-width="4" stroke-linecap="round"/><path d="M82 80q8 6 16 0" fill="none" stroke="#14213d" stroke-width="3" stroke-linecap="round"/></svg><div class="caption">LEARN</div><div class="prompt">What do you learn at school?</div></div>
+</div>
+</div></div>
+
+<div class="card"><button class="acc">🧒 Picture Set B — Picture Talk</button>
+<div class="panel">
+<div class="picture-card" style="max-width:420px;margin:auto">
+<svg viewBox="0 0 420 250" role="img" aria-label="child using a computer">
+<rect x="0" y="0" width="420" height="250" rx="16" fill="#eef7f8"/>
+<rect x="0" y="180" width="420" height="70" fill="#d8c9a9"/>
+<rect x="240" y="86" width="130" height="82" rx="8" fill="#14213d"/>
+<rect x="251" y="96" width="108" height="61" rx="4" fill="#78d9ef"/>
+<rect x="292" y="168" width="28" height="28" fill="#14213d"/>
+<path d="M275 198h65" stroke="#14213d" stroke-width="8" stroke-linecap="round"/>
+<circle cx="155" cy="89" r="31" fill="#f4c7a1"/>
+<path d="M126 83c4-38 55-40 61 0-17-11-42-11-61 0z" fill="#5a3b2e"/>
+<path d="M135 120c12-8 30-8 42 0l15 61h-73z" fill="#6dbb5a"/>
+<path d="M150 126v50M162 126v50" stroke="#f39c4a" stroke-width="12"/>
+<circle cx="145" cy="88" r="3" fill="#14213d"/><circle cx="165" cy="88" r="3" fill="#14213d"/>
+<path d="M151 101q7 5 14 0" fill="none" stroke="#14213d" stroke-width="2"/>
+<rect x="78" y="145" width="90" height="22" rx="5" fill="#f6c945"/>
+<rect x="82" y="139" width="30" height="9" rx="3" fill="#00a8cc"/>
+<circle cx="360" cy="52" r="22" fill="#f6c945"/>
+</svg>
+<div class="caption">WHAT CAN YOU SEE?</div>
+<div class="prompt">What is the boy doing? What is on the desk? Do you like computers? What do you use a computer for?</div>
+</div>
+</div></div>
+
+<div class="card"><button class="acc">🌅 Picture Set C — My School Day Sequence</button>
+<div class="panel">
+<div class="resource-grid">
+<div class="picture-card">
+<svg viewBox="0 0 180 120"><rect width="180" height="120" rx="12" fill="#eef7f8"/><circle cx="90" cy="48" r="25" fill="#f6c945"/><path d="M90 8v15M90 73v15M50 48H35M145 48h-15M62 20l10 10M118 20l-10 10" stroke="#f39c4a" stroke-width="6"/><rect x="66" y="78" width="48" height="25" rx="6" fill="#6dbb5a"/></svg>
+<div class="caption">1 • MORNING</div><div class="prompt">I get up. I get ready.</div></div>
+
+<div class="picture-card">
+<svg viewBox="0 0 180 120"><rect width="180" height="120" rx="12" fill="#eef7f8"/><path d="M35 100V55h110v45z" fill="#00a8cc"/><path d="M25 55l65-38 65 38z" fill="#14213d"/><rect x="70" y="68" width="40" height="32" fill="#f6c945"/><rect x="50" y="65" width="15" height="15" fill="#fff"/><rect x="115" y="65" width="15" height="15" fill="#fff"/></svg>
+<div class="caption">2 • SCHOOL</div><div class="prompt">I go to school.</div></div>
+
+<div class="picture-card">
+<svg viewBox="0 0 180 120"><rect width="180" height="120" rx="12" fill="#eef7f8"/><circle cx="60" cy="60" r="20" fill="#f4c7a1"/><circle cx="120" cy="60" r="20" fill="#f4c7a1"/><path d="M40 78q20 30 40 0M100 78q20 30 40 0" fill="#6dbb5a"/><circle cx="90" cy="95" r="18" fill="#f6c945"/><path d="M82 95h16" stroke="#14213d" stroke-width="4"/></svg>
+<div class="caption">3 • BREAK / PLAY</div><div class="prompt">I talk and play with my friends.</div></div>
+
+<div class="picture-card">
+<svg viewBox="0 0 180 120"><rect width="180" height="120" rx="12" fill="#eef7f8"/><rect x="60" y="45" width="65" height="45" rx="4" fill="#14213d"/><rect x="67" y="51" width="51" height="30" fill="#78d9ef"/><path d="M75 99h35M90 90v9" stroke="#14213d" stroke-width="7" stroke-linecap="round"/><circle cx="35" cy="40" r="20" fill="#f6c945"/><path d="M28 61l10-20 12 20" fill="#6dbb5a"/></svg>
+<div class="caption">4 • AFTER SCHOOL</div><div class="prompt">I go home. I use my computer.</div></div>
+</div>
+</div></div>
+
+</section>
+
+<p class="footer">Deniz Niflioğlu • English Code Quest • Weeks 1 &amp; 2</p>
+</div>
+
+<script>
+function showPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.acc').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const panel=btn.nextElementSibling;
+    const open=panel.classList.contains('open');
+    btn.parentElement.parentElement.querySelectorAll('.panel.open').forEach(p=>{
+      p.classList.remove('open');
+      p.previousElementSibling.classList.remove('open');
+    });
+    if(!open){panel.classList.add('open');btn.classList.add('open');}
+  });
+});
+function toggleAnswers(btn){
+  const a=btn.nextElementSibling;
+  const show=a.style.display!=='block';
+  a.style.display=show?'block':'none';
+  btn.textContent=show?'Hide Answers':'Show Answers';
+}
+
+function checkMemory(btn){
+  const sec=btn.closest('.panel');let ok=0;
+  sec.querySelectorAll('.memory-card').forEach(c=>{
+    const i=c.querySelector('input');const v=i.value.trim().toLowerCase();
+    c.classList.remove('correct','wrong');
+    if(v===''){return;}
+    if(v===i.dataset.answer){c.classList.add('correct');ok++;}else{c.classList.add('wrong');}
+  });
+  sec.querySelector('.memory-score').textContent='Correct: '+ok+' / 18';
+}
+function resetMemory(btn){
+  const sec=btn.closest('.panel');
+  sec.querySelectorAll('.memory-card').forEach(c=>{c.classList.remove('correct','wrong');c.querySelector('input').value='';});
+  sec.querySelector('.memory-score').textContent='Correct: 0 / 18';
+}
+</script>
+</body>
+</html>
